@@ -2,7 +2,7 @@
 
 | Curso | Semestre | Grado |
 |-------|----------|-------|
-| 2025  | 1        | Ingeniería del Software |
+| 2º  |   2      | Ingeniería del Software |
 
 
 ## Profesor
