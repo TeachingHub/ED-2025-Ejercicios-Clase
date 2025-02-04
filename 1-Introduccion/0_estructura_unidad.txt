@@ -1,0 +1,34 @@
+unit MyUnit;
+
+interface
+
+// Aquí se declaran las variables, constantes, tipos y procedimientos o funciones
+// que serán accesibles desde otras unidades o programas que usen esta unidad.
+
+const
+    MAX_VALUE = 100; // Ejemplo de constante
+
+type
+    TMyRecord = record
+        Field1: Integer;
+        Field2: String;
+    end; // Ejemplo de tipo
+
+var
+    GlobalVar: Integer; // Ejemplo de variable global
+
+procedure MyProcedure; // Ejemplo de procedimiento
+
+implementation
+
+// Aquí se implementan las variables, constantes, tipos y procedimientos o funciones
+// que fueron declarados en la sección de interface. También se pueden declarar
+// e implementar elementos que solo serán accesibles dentro de esta unidad.
+
+procedure MyProcedure;
+begin
+    // Implementación del procedimiento
+    GlobalVar := MAX_VALUE;
+end;
+
+end.
