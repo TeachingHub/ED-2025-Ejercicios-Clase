@@ -14,6 +14,7 @@
 
 1. [Introducción](#introducción)
 2. [Tipos Abstractos de Datos (TAD)](#tad)
+3. [Complejidad](#complejidad)
 3. [Pilas](#pilas)
 4. [Complejidad](#complejidad)
 5. [Colas](#colas)
@@ -30,6 +31,11 @@
 ## Tipos Abstractos de Datos (TAD)
 - Definición, implementación y uso de un TAD.
 - Unidades en Pascal.
+
+## Complejidad
+- Concepto de complejidad.
+- Notación O-grande.
+- Ejemplos de tiempo de ejecución de programas con diferentes complejidades.
 
 ## Pilas
 Contenido de pilas.
