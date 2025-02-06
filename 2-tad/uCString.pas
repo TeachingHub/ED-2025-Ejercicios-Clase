@@ -6,7 +6,7 @@ uses Math;
 
 type
     cString = record
-        data: array of char;
+        data: string[255];
         length: Integer;
         capacity: Integer;
     end;
@@ -25,8 +25,8 @@ procedure CStringToUpper(var s: cString);
 implementation
 
 procedure CreateCString(var s: cString; size: Integer);
-begin
-    SetLength(s.data, size);
+begin   
+    s.data := '';
     s.length := 0;
     s.capacity := size;
 end;
@@ -35,22 +35,20 @@ procedure SetCStringValue(var s: cString; value: string);
 var
     i: Integer;
 begin
-    s.length := Length(value);
-    if s.length > s.capacity then
-        s.length := s.capacity;
+    s.length := Min(Length(value), s.capacity);
     for i := 1 to s.length do
-        s.data[i - 1] := value[i];
+        s.data[i] := value[i];
 end;
 
 function GetCStringValue(s: cString): string;
 var
     i: Integer;
-    resultStr: string;
+    result: string;
 begin
-    SetLength(resultStr, s.length);
+    result := '';
     for i := 1 to s.length do
-        resultStr[i] := s.data[i - 1];
-    GetCStringValue := resultStr;
+        result := result + s.data[i];
+    GetCStringValue := result;
 end;
 
 function CStringLength(s: cString): Integer;
@@ -65,59 +63,61 @@ end;
 
 procedure CStringCat(var dest: cString; src: cString);
 var
-    i, j: Integer;
+    i, availableSpace: Integer;
 begin
-    j := dest.length;
-    for i := 0 to src.length - 1 do
-    begin
-        if j < dest.capacity then
-        begin
-            dest.data[j] := src.data[i];
-            Inc(j);
-        end
-        else
-            Break;
-    end;
-    dest.length := j;
+    availableSpace := dest.capacity - dest.length;
+    for i := 1 to Min(src.length, availableSpace) do
+        dest.data[dest.length + i] := src.data[i];
+    dest.length := Min(dest.length + src.length, dest.capacity);
 end;
 
 procedure CStringCopy(var dest: cString; src: cString);
 var
     i: Integer;
 begin
-    dest.length := src.length;
-    if dest.length > dest.capacity then
-        dest.length := dest.capacity;
-    for i := 0 to dest.length - 1 do
+    dest.length := Min(src.length, dest.capacity);
+    for i := 1 to dest.length do
         dest.data[i] := src.data[i];
 end;
 
+{ 0 if strings are equal
+  1 if the first non-matching character in str1 is greater (in ASCII) than that of str2.
+ -1 if the first non-matching character in str1 is lower (in ASCII) than that of str2.}
 function CStringCompare(s1, s2: cString): Integer;
 var
-    i, resul: Integer;
-    
+    i, res: Integer;
+    dis: boolean;
 begin
-    for i := 0 to Min(s1.length, s2.length) - 1 do
+    res := 0;
+    dis := False;
+    i := 1;
+    while (i <= Min(s1.length, s2.length)) and not dis do
     begin
-        if s1.data[i] < s2.data[i] then
-           resul := -1
-        else if s1.data[i] > s2.data[i] then
-            resul:= 1
+        if s1.data[i] <> s2.data[i] then
+        begin
+            dis := True;
+            if s1.data[i] > s2.data[i] then
+                res := 1
+            else
+                res := -1;
+        end;
+        Inc(i);
     end;
-    if s1.length < s2.length then
-        resul := -1
-    else if s1.length > s2.length then
-        resul := 1
-    else
-        resul := 0;
-    CStringCompare := resul;
+    if not dis then
+    begin
+        if s1.length > s2.length then
+            res := 1
+        else if s1.length < s2.length then
+            res := -1;
+    end;
+    CStringCompare := res;
 end;
 
 procedure CStringToLower(var s: cString);
 var
     i: Integer;
 begin
-    for i := 0 to s.length - 1 do
+    for i := 1 to s.length do
         s.data[i] := LowerCase(s.data[i]);
 end;
 
@@ -125,7 +125,7 @@ procedure CStringToUpper(var s: cString);
 var
     i: Integer;
 begin
-    for i := 0 to s.length - 1 do
+    for i := 1 to s.length do
         s.data[i] := UpCase(s.data[i]);
 end;
 

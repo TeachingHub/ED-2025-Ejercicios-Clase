@@ -10,7 +10,8 @@ type
         x, y, z: Real;
     end;
 
-function CrearPunto3D(x: Real; y: Real; z: Real): TPunto3D;
+//function CrearPunto3D(x: Real; y: Real; z: Real): TPunto3D;
+procedure InicializarPunto3D(var punto: TPunto3D; x: Real; y: Real; z: Real);
 procedure SetX(var p: TPunto3D; x: Real);
 procedure SetY(var p: TPunto3D; y: Real);
 procedure SetZ(var p: TPunto3D; z: Real);
@@ -22,14 +23,21 @@ function Distancia(p1, p2: TPunto3D): Real;
 
 implementation
 
-function CrearPunto3D(x: Real; y: Real; z: Real): TPunto3D;
-var 
-    punto: TPunto3D;
+// function CrearPunto3D(x: Real; y: Real; z: Real): TPunto3D;
+// var 
+//     punto: TPunto3D;
+// begin
+//     punto.x := x;
+//     punto.y := y;
+//     punto.z := z;
+//     CrearPunto3D := punto;
+// end;
+
+procedure InicializarPunto3D(var punto: TPunto3D; x: Real; y: Real; z: Real);
 begin
     punto.x := x;
     punto.y := y;
     punto.z := z;
-    CrearPunto3D := punto;
 end;
 
 procedure SetX(var p: TPunto3D; x: Real);

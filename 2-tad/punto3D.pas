@@ -8,12 +8,9 @@ var
     dist: Real;
 
 begin
-    // Inicializar la variable distancia
-    dist := 0.0;
-
     // Crear dos puntos 3D
-    punto1 := CrearPunto3D(1.0, 2.0, 3.0);
-    punto2 := CrearPunto3D(4.0, 5.0, 6.0);
+    InicializarPunto3D(punto1, 1.0, 2.0, 3.0);
+    InicializarPunto3D(punto2, 4.0, 5.0, 6.0);
 
     // Mostrar coordenadas de los puntos
     Writeln('Punto 1: (', GetX(punto1):0:2, ', ', GetY(punto1):0:2, ', ', GetZ(punto1):0:2, ')');
